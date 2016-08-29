@@ -35,6 +35,7 @@ void main()
             printf("Enter data : ");
             scanf("%d", &no);
             push(no);
+            rear->ptr=front;
             break;
         case 2:
             pop();
@@ -116,6 +117,7 @@ void pop()
     } 
     else {
         front=front->ptr;
+        rear->ptr=front;
         temp->ptr=NULL;
         printf("\n Popped value : %d", temp->info);
         free(temp);
