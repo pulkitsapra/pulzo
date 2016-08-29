@@ -5,7 +5,7 @@ struct node
 {
     int info;
     struct node *ptr;
-}*front =NULL, *rear=NULL, *temp=NULL;
+}*front =NULL, *rear=NULL, *temp=NULL,*front1;
 
 void push(int data);
 void pop();
@@ -79,21 +79,20 @@ void push(int data)
 /* Display stack elements */
 void display()
 {
-    struct node* tmp;
-    tmp=front;
+    front1=front;
  
     if((rear == NULL)&&(front==NULL))
           return;
     
  
-    while(tmp!= rear)
+    while(front1!= rear)
     {
-        printf("%d ",tmp->info);
-      tmp = tmp->ptr;
+        printf("%d ",front1->info);
+      front1 = front1->ptr;
     }
     
-    if(tmp == rear)
-        printf("%d",tmp->info);
+    if(front1 == rear)
+        printf("%d",front1->info);
 }
  
 /* Pop Operation on stack */
@@ -106,20 +105,12 @@ void pop()
         printf("\n Error : Trying to pop from empty stack");
         return;
     }
-    
-    else if (front==rear) 
-    {
-       free(temp);
-       rear=front=NULL;
-       printf("list emptied\n");
-       
-    } 
-    else {
+    else
         front=front->ptr;
         temp->ptr=NULL;
         printf("\n Popped value : %d", temp->info);
         free(temp);
-     }   
+        
     
 }
  
