@@ -5,54 +5,58 @@ struct node
 {
     int info;
     struct node *ptr;
-}*front =NULL, *rear=NULL, *temp=NULL;
+} *front =NULL, *rear=NULL, *temp=NULL,*head=NULL;
 
 void push(int data);
-void pop();
+int pop();
 void display();
+
+
+int count=0;
 
 
 void main()
 {
-    int no, ch, e;
+    int no, i , k, elts,buf;
  
-    printf("\n 1 - Push");
-    printf("\n 2 - Pop");
-    printf("\n 5 - Exit");
-    printf("\n 6 - Display");
+    printf("Please enter the values on n and i: ");
+    scanf("%d %d",&no,&i);
     
- 
-  
- 
-    while (1)
-    {
-        printf("\n Enter choice : ");
-        scanf("%d", &ch);
- 
-        switch (ch)
+    printf("\nThe removal of sequence is as follows -\n");
+    
+    
+    
+    
+    for(i=0;i<no;++i)
         {
-        case 1:
-            printf("Enter data : ");
-            scanf("%d", &no);
-            push(no);
-            rear->ptr=front;
-            break;
-        case 2:
-            pop();
-            break;
-        
-        case 5:
-            exit(0);
-        case 6:
-            display();
-            break;
-        
-        default :
-            printf(" Wrong choice, Please enter correct choice  ");
-            break;
+          push(i+1);
         }
-    }
-}
+
+    elts=number_of_elts();
+     
+    head=front;
+    
+    
+    while(elts>1)
+    {
+       for(k=1;k<i;++k){
+         buf=pop();
+         push(buf);
+         display(); 
+         printf("\n");
+                          
+     }
+       if(elts!=1)
+            pop();
+       
+        
+        
+        elts=number_of_elts();
+    }       
+    
+    display();
+
+}     
 
 void push(int data)
 {
@@ -74,6 +78,8 @@ void push(int data)
         
         rear = temp;
     }
+    
+    count++;
     
 }
  
@@ -98,7 +104,7 @@ void display()
 }
  
 /* Pop Operation on stack */
-void pop()
+int pop()
 {
     temp=front;
  
@@ -113,16 +119,22 @@ void pop()
        free(temp);
        rear=front=NULL;
        printf("list emptied\n");
-       
+       return;
     } 
     else {
         front=front->ptr;
-        rear->ptr=front;
         temp->ptr=NULL;
+        return(temp->info);
         printf("\n Popped value : %d", temp->info);
         free(temp);
      }   
     
+    count--;
+}
+
+int number_of_elts()
+{
+   return count;
 }
  
 
