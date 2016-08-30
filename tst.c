@@ -15,11 +15,10 @@ int count =0;
 
 void main()
 {
-    int no, i , k, elts,buf;
- 
+    int no, i , k, elts,buf ,counter=1 ;
     printf("Please enter the values on n and i: ");
     scanf("%d%d",&no,&i);
-    printf("%d\n",i);
+    int m=i;
     
     printf("\nThe removal of sequence is as follows -\n");
     
@@ -32,28 +31,34 @@ void main()
         }
 
     elts=number_of_elts();
-    
      
-   
-    
-    
-    while(elts>1)
+    while(count>1)
     {
-       for(k=1;k<i;++k){
+       for(k=1;k<m;++k){
          buf=pop();
+         count--;
          push(buf);
-         display(); 
-         printf("\n");
-                          
-     }
-       pop();
-       elts--;
+    }
+     
+       
+       
+       
+       printf("\n");
+       
+       if(count==no)
+          printf("[%d].Firstly,the person at position %d is removed", counter++, pop());
+       else if (count==1)
+          printf("[%d].Finally,the person at position %d is removed", counter, pop());
+       else
+          printf("[%d].Then,the person at position %d is removed",counter++, pop());
+                
+       count--; 
+          
         
-        
-        //elts=number_of_elts();
-    }       
+     }       
     
-    display();
+    printf("\n\nHence the person at position %d surives",front->info);
+    
 
 }    
 
@@ -95,7 +100,7 @@ void display()
     while(tmp!= rear)
     {
         printf("%d ",tmp->info);
-      tmp = tmp->ptr;
+        tmp = tmp->ptr;
     }
     
     if(tmp == rear)
@@ -118,7 +123,7 @@ int pop()
        free(temp);
        //count--;
        rear=front=NULL;
-       printf("list emptied\n");
+       //printf("list emptied\n");
        return;
     } 
     else {
